@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href = "@{'/css/bootstrap.min.css'}">
+    <script type="text/javascript" th:src ="@{'/js/bootstrap.bundle.js'}" ></script>
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/students">Student List</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/students">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Add Student</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</head>
+<body>
+<br>
+<table class="table table-hover">
+    <thead>
+        <th scope="col" >ID:</th>
+        <th scope="col">NAME:</th>
+        <th scope="col">SURNAME:</th>
+        <th scope="col">EXAM:</th>
+        <th scope="col">MARK:</th>
+    </thead>
+    <tbody>
+    <tr th:each="std : ${students}" th:style="${std.exam<50?'color: red':''}">
+    <td th:text="${std.id}"></td>
+    <td th:text="${std.name}"></td>
+    <td th:text="${std.surname}"></td>
+    <td th:text="${std.exam}" ></td>
+        <td>
+            <span th:if="${std.exam >= 90}">A</span>
+            <span th:if="${std.exam >= 75 and std.exam <= 89}">B</span>
+            <span th:if="${std.exam >= 60 and std.exam <= 74}">C</span>
+            <span th:if="${std.exam >= 49 and std.exam <= 59}">D</span>
+            <span th:if="${std.exam < 50}">F</span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+    <!--    <td>-->
+<!--        <span th:if="${std.exam >= 90}">A</span>-->
+<!--        <span th:if="${std.exam >= 75 and student.exam <= 89}">B</span>-->
+<!--        <span th:if="${std.exam >= 60 and student.exam <= 74}">C</span>-->
+<!--        <span th:if="${std.exam >= 49 and student.exam <= 59}">D</span>-->
+<!--        <span th:if="${std.exam < 50}">F</span>-->
+<!--    </td>-->
+
+</body>
+</html>
